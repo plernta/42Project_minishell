@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 20:26:56 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/25 14:12:48 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:40:24 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,22 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
-	array = NULL;
 }
 
 void	free_env(t_env **env)
 {
 	t_env	*temp;
 
-	if (!env)
+	if (!env || !*env)
 		return ;
 	while (*env)
 	{
 		temp = *env;
 		*env = (*env)->next;
-		free(temp->key);
-		free(temp->value);
+		if (temp->key)
+			free(temp->key);
+		if (temp->value)
+			free(temp->value);
 		free(temp);
 	}
 	*env = NULL;
