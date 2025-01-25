@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 20:26:56 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/24 23:00:24 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/25 14:12:48 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	free_tree(t_token *token)
 
 	if (!token)
 		return ;
+	if (token->type == COMMAND)
+		free((t_cmd *)token);
 	else if (token->type == REDIR)
 	{
 		redir = (t_redir *)token;

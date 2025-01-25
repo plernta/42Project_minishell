@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+         #
+#    By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 12:15:22 by plesukja          #+#    #+#              #
-#    Updated: 2025/01/24 23:18:59 by plesukja         ###   ########.fr        #
+#    Updated: 2025/01/25 15:03:01 by plesukja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@
 
 NAME        	:= minishell
 CC          	:= cc
-#FLAGS       	:= -Wall -Wextra -Werror 
-FLAGS       	:= -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS       	:= -Wall -Wextra -Werror
+# FLAGS       	:= -Wall -Wextra -Werror -fsanitize=address -g
 # LINUX_readline 	:= -lreadline
 
 ## MAC_readline
