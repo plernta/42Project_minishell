@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 08:37:12 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/25 16:41:44 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:59:30 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,7 @@ static void	create_env_linked_list(t_env **env, char **envp)
 			return ;
 		}
 		env_node->key = ft_strndup(envp[i], ft_strchr(envp[i], '=') - envp[i]);
-		if (!env_node->key)
-		{
-			free(env_node);
-			free_env(env);
-			return ;
-		}
 		env_node->value = ft_strdup(ft_strchr(envp[i], '=') + 1);
-		if (!env_node->value)
-		{
-			free(env_node->key);
-			free(env_node);
-			free_env(env);
-			return ;
-		}
 		env_node->next = NULL;
 		if (!(*env))
 			*env = env_node;

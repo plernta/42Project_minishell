@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 20:26:56 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/25 16:40:24 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:00:24 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,21 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
+	array = NULL;
 }
 
 void	free_env(t_env **env)
 {
 	t_env	*temp;
 
-	if (!env || !*env)
+	if (!env)
 		return ;
 	while (*env)
 	{
 		temp = *env;
 		*env = (*env)->next;
-		if (temp->key)
-			free(temp->key);
-		if (temp->value)
-			free(temp->value);
+		free(temp->key);
+		free(temp->value);
 		free(temp);
 	}
 	*env = NULL;
@@ -52,8 +51,6 @@ void	free_tree(t_token *token)
 
 	if (!token)
 		return ;
-	if (token->type == COMMAND)
-		free((t_cmd *)token);
 	else if (token->type == REDIR)
 	{
 		redir = (t_redir *)token;

@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 17:28:32 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/24 22:49:56 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:28:39 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_token	*create_redir_token(t_token *token, char *file_start, char *file_end,
 	redir->type = REDIR;
 	redir->prior_token = token;
 	redir->mode = token_sign;
+	redir->file = file_start;
+	redir->end_file = file_end;
 	if (redir->mode == 'h')
 	{
 		heredoc_get_input(redir);
@@ -44,8 +46,6 @@ t_token	*create_redir_token(t_token *token, char *file_start, char *file_end,
 	}
 	else
 		redir->temp_file = NULL;
-	redir->file = file_start;
-	redir->end_file = file_end;
 	if (token->type == REDIR)
 		return (chain_redir_node(token, redir));
 	return ((t_token *)redir);

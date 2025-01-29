@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 10:46:41 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/24 23:57:40 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:02:34 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,50 @@ static char	**parse_arguments(char **args, t_shell *shell)
 			free(tmp);
 		i++;
 	}
+	new_args[j] = NULL;
+	if (j == 0)
+	{
+		free(new_args);
+		return (NULL);
+	}
 	return (new_args);
+}
+
+// void	run_command(t_cmd *cmd, t_shell *shell)
+// {
+// 	char	**new_args;
+
+// 	if (!cmd->av[0])
+// 		return ;
+// 	new_args = parse_arguments(cmd->av, shell);
+// 	if (!new_args)
+// 		error_exit("parse arguments failed", shell);
+// 	// if (!new_args[0])
+// 	// {
+// 	// 	free_array(new_args);
+// 	// 	shell->exit_status = 0;
+// 	// 	return ;
+// 	// }
+// 	if (is_builtin_cmd(new_args[0]))
+// 		run_builtin_cmd(shell, new_args);
+// 	else
+// 	{
+// 		if (shell->has_pipe)
+// 			execute(new_args, shell);
+// 		else
+// 			fork_and_execute(new_args, shell);
+// 	}
+// 	free_array(new_args);
+// }
+
+void	check_args_before_execute(char **args, t_shell *shell)
+{
+	if (!args || !args[0])
+	{
+		shell->exit_status = 0;
+		free_array(args);
+		clean_and_exit(shell);
+	}
 }
 
 void	run_command(t_cmd *cmd, t_shell *shell)
@@ -42,7 +85,10 @@ void	run_command(t_cmd *cmd, t_shell *shell)
 		return ;
 	new_args = parse_arguments(cmd->av, shell);
 	if (!new_args)
-		error_exit("parse arguments failed", shell);
+	{
+		shell->exit_status = 0;
+		return ;
+	}
 	if (is_builtin_cmd(new_args[0]))
 		run_builtin_cmd(shell, new_args);
 	else
@@ -53,16 +99,6 @@ void	run_command(t_cmd *cmd, t_shell *shell)
 			fork_and_execute(new_args, shell);
 	}
 	free_array(new_args);
-}
-
-void	check_args_before_execute(char **args, t_shell *shell)
-{
-	if (!args || !args[0])
-	{
-		shell->exit_status = 0;
-		free_array(args);
-		clean_and_exit(shell);
-	}
 }
 
 void	fork_and_execute(char **new_args, t_shell *shell)

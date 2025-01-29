@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+         #
+#    By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 12:15:22 by plesukja          #+#    #+#              #
-#    Updated: 2025/01/25 18:33:32 by plesukja         ###   ########.fr        #
+#    Updated: 2025/01/24 23:18:59 by plesukja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,14 @@
 
 NAME        	:= minishell
 CC          	:= cc
-FLAGS       	:= -Wall -Wextra -Werror
+#FLAGS       	:= -Wall -Wextra -Werror 
+FLAGS       	:= -Wall -Wextra -Werror -fsanitize=address -g
+# LINUX_readline 	:= -lreadline
+
+## MAC_readline
+# ## original
+#MAC_READ_LINE = -I/opt/homebrew/Cellar/readline/8.2.13/include -L/opt/homebrew/Cellar/readline/8.2.13/lib -lreadline
+#MAC_READ_LINE = -I/usr/local/Cellar/readline/8.2.13/include -L/usr/local/Cellar/readline/8.2.13/lib -lreadline
 
 LIB_RL := -lreadline
 ifeq ($(shell uname), Darwin)

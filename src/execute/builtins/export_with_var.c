@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 23:26:22 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/24 22:41:57 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:52:17 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ static bool	find_existed_node_and_update(t_env **env, char *inp_key,
 	{
 		if (ft_strcmp(cur->key, inp_key) == 0)
 		{
-			free(cur->value);
-			cur->value = inp_value;
+			if (inp_value)
+			{
+				free(cur->value);
+				cur->value = inp_value;
+			}
 			free(inp_key);
 			return (true);
 		}

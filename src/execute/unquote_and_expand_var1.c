@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 20:41:27 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/23 10:29:34 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:03:13 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ char	*var_expansion(char **s, t_shell *shell)
 	var_value = ft_getenv(shell->env, var_name);
 	free (var_name);
 	if (!var_value)
+	{
+		*s += var_name_len;
 		return (ft_strdup(""));
+	}
 	*s += var_name_len;
 	return (ft_strdup(var_value));
 }
