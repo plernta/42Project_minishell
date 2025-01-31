@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 08:37:12 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/31 22:54:48 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:26:01 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,30 +81,6 @@ static void	init_shell(t_shell **shell, char **envp)
 	(*shell)->out_fd = STDOUT_FILENO;
 }
 
-// int	main(int ac, char **av, char **envp)
-// {
-// 	t_shell	*shell;
-// 	char	*input;
-
-// 	(void)ac;
-// 	(void)av;
-// 	shell = NULL;
-// 	input = NULL;
-// 	init_shell(&shell, envp);
-// 	run_signals(1, shell);
-// 	while (get_input(&input, shell) != -1)
-// 	{
-// 		process_input(shell, input);
-// 		restore_fd(shell);
-// 		free_tree(shell->current_cmd);
-// 		shell->current_cmd = NULL;
-// 	}
-// 	if (input)
-// 		free(input);
-// 	clean_and_exit(shell);
-// 	return (0);
-// }
-
 int	main(int ac, char **av, char **envp)
 {
 	t_shell	*shell;
@@ -115,7 +91,6 @@ int	main(int ac, char **av, char **envp)
 	shell = NULL;
 	input = NULL;
 	init_shell(&shell, envp);
-	//run_signals(1, shell);
 	while (get_input(&input, shell) != -1)
 	{
 		process_input(shell, input);
