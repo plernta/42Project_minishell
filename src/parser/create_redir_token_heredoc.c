@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:55:04 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/28 17:57:27 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:47:25 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	heredoc_get_input_cont(t_redir *redir, int heredoc_fd)
 	delimiter = redir->file;
 	while (true)
 	{
-		heredoc_line = readline("< ");
+		heredoc_line = readline("> ");
 		if (!heredoc_line || !ft_strcmp(heredoc_line, delimiter))
 		{
 			free(heredoc_line);

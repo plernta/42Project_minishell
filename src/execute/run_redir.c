@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 10:42:00 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/24 22:45:53 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:46:56 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	redir_error(t_redir *redir, char *file, t_shell *shell)
 		perror("here_doc");
 	else
 		perror(file);
-	shell->exit_status = 1;
+	if (redir->mode != 'h')
+		shell->exit_status = 1;
 	if (shell->has_pipe)
 	{
 		free(file);
@@ -93,7 +94,7 @@ void	run_redir(t_redir *redir, t_shell *shell)
 	}
 	if (redir->mode == '>' || redir->mode == '+')
 		shell->out_fd = set_new_out_fd(redir, file_name, shell);
-	else if (redir->mode == '<' || redir->mode == 'h')
+	else if (redir->mode == '<')
 		shell->in_fd = set_new_in_fd(redir, file_name, shell);
 	else if (redir->mode == 'h')
 		shell->in_fd = set_new_in_fd(redir, redir->temp_file, shell);

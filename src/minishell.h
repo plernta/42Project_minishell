@@ -6,11 +6,13 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 08:36:54 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/24 23:56:30 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:58:31 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft/libft.h"
+#include "../libft/ft_printf/ft_printf.h"
+#include "../libft/get_next_line/get_next_line.h"
 #include <readline/readline.h> //readline
 #include <readline/history.h> //add_history
 #include <unistd.h>
@@ -26,7 +28,7 @@
 #define WHITESPACE " \t\r\n\v"
 #define SIGN "><|"
 
-extern int	g_signal;
+extern volatile sig_atomic_t	g_signal;
 
 typedef enum e_cmd_oprt_type
 {
@@ -162,5 +164,8 @@ char	*ft_getenv(t_env *env, char *key);
 void	free_tree(t_token *token);
 
 //****************/ signal
-void	run_signals(int sig, t_shell *shell);
-void	restore_prompt(int signum);
+//void	run_signals(int sig, t_shell *shell);
+//void	restore_prompt(int signum);
+void	init_signal(void);
+void	sig_handling(int signum);
+void	set_exit_status(t_shell *shell, int signum);

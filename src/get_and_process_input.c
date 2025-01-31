@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:35:44 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/29 17:36:26 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:50:35 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	get_input(char **line, t_shell *shell)
 	char	*prompt;
 
 	(void)shell;
+	g_signal = 0;
 	prompt = "minishell$ ";
 	*line = readline(prompt);
 	if (!*line)
@@ -47,9 +48,11 @@ void	process_input(t_shell *shell, char *input)
 {
 	if (!build_tree(shell, input))
 		return ;
-	run_signals(2, shell);
+	g_signal = -1;
+	init_signal();
+	// run_signals(2, shell);
 	run_input(shell->current_cmd, shell);
-	run_signals(1, shell);
+	//run_signals(1, shell);
 }
 
 bool	build_tree(t_shell *shell, char *input)
