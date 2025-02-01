@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 16:46:03 by plesukja          #+#    #+#             */
-/*   Updated: 2025/02/01 15:22:52 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:43:19 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	back_slash(int signum)
 {
 	(void)signum;
 	g_signal = 131;
-	write(STDERR_FILENO, "Quit: 3\n", 8);
+	write(STDERR_FILENO, "Quit (core dumped)\n", 20);
 }
 
 // run_signals(1) For restoring prompt behavior // before command is executed

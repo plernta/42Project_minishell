@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:35:44 by plesukja          #+#    #+#             */
-/*   Updated: 2025/02/01 15:12:13 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:26:58 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	process_input(t_shell *shell, char *input)
 	run_signals(2, shell);
 	run_input(shell->current_cmd, shell);
 	run_signals(1, shell);
-	run_input(shell->current_cmd, shell);
 }
 
 bool	build_tree(t_shell *shell, char *input)
