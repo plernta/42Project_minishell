@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 20:26:56 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/24 23:00:24 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:49:30 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_tree(t_token *token)
 
 	if (!token)
 		return ;
-	else if (token->type == REDIR)
+	if (token->type == REDIR)
 	{
 		redir = (t_redir *)token;
 		if (redir->mode == 'h' && redir->temp_file)
@@ -68,4 +68,6 @@ void	free_tree(t_token *token)
 		free_tree(((t_pipe *)token)->right);
 		free((t_pipe *)token);
 	}
+	else if (token->type == COMMAND)
+		free((t_cmd *)token);
 }
