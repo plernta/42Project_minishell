@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_process_input.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:35:44 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/31 23:27:11 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:12:13 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	process_input(t_shell *shell, char *input)
 {
 	if (!build_tree(shell, input))
 		return ;
-	g_signal = -1;
-	init_signal();
+	run_signals(2, shell);
+	run_input(shell->current_cmd, shell);
+	run_signals(1, shell);
 	run_input(shell->current_cmd, shell);
 }
 

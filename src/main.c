@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 08:37:12 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/31 23:26:01 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:11:33 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	main(int ac, char **av, char **envp)
 	shell = NULL;
 	input = NULL;
 	init_shell(&shell, envp);
+	run_signals(1, shell);
 	while (get_input(&input, shell) != -1)
 	{
 		process_input(shell, input);

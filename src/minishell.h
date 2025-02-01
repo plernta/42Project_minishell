@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 08:36:54 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/31 22:58:31 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:14:41 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,8 @@ char	*ft_getenv(t_env *env, char *key);
 void	free_tree(t_token *token);
 
 //****************/ signal
-//void	run_signals(int sig, t_shell *shell);
-//void	restore_prompt(int signum);
-void	init_signal(void);
-void	sig_handling(int signum);
+void	run_signals(int sig, t_shell *shell);
+void	restore_prompt(int signum);
+// void	init_signal(void);
+// void	sig_handling(int signum);
 void	set_exit_status(t_shell *shell, int signum);

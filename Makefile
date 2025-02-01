@@ -6,7 +6,7 @@
 #    By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 12:15:22 by plesukja          #+#    #+#              #
-#    Updated: 2025/02/01 15:00:33 by plesukja         ###   ########.fr        #
+#    Updated: 2025/02/01 15:03:49 by plesukja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@
 
 NAME        	:= minishell
 CC          	:= cc
-#FLAGS       	:= -Wall -Wextra -Werror 
-FLAGS       	:= -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS       	:= -Wall -Wextra -Werror 
+#FLAGS       	:= -Wall -Wextra -Werror -fsanitize=address -g
 # LINUX_readline 	:= -lreadline
 
 ## MAC_readline
