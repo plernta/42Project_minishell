@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_process_input.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:35:44 by plesukja          #+#    #+#             */
-/*   Updated: 2025/02/01 18:42:55 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:35:24 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	get_input(char **line, t_shell *shell)
 	char	*prompt;
 
 	(void)shell;
-	g_signal = 0;
 	prompt = "minishell$ ";
 	*line = readline(prompt);
 	if (!*line)
@@ -46,11 +45,22 @@ int	get_input(char **line, t_shell *shell)
 
 void	process_input(t_shell *shell, char *input)
 {
+	if (g_signal == 130)
+	{
+		shell->exit_status = 130;
+		g_signal = 0;
+	}
 	if (!build_tree(shell, input))
+	{
+		if (g_signal == 130)
+			shell->exit_status = 130;
 		return ;
+	}
 	run_signals(2, shell);
 	run_input(shell->current_cmd, shell);
 	run_signals(1, shell);
+	if (g_signal == 130)
+		shell->exit_status = 130;
 }
 
 bool	build_tree(t_shell *shell, char *input)

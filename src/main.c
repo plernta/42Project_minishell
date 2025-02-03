@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 08:37:12 by plesukja          #+#    #+#             */
-/*   Updated: 2025/02/01 18:47:46 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:33:30 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int	main(int ac, char **av, char **envp)
 		set_exit_status(shell, g_signal);
 		if (!shell->current_cmd)
 			free_tree(shell->current_cmd);
-		// free_tree(shell->current_cmd);
 		shell->current_cmd = NULL;
+		g_signal = 0;
 	}
 	if (input)
 		free(input);

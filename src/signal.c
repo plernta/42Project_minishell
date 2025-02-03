@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 16:46:03 by plesukja          #+#    #+#             */
-/*   Updated: 2025/02/01 16:43:19 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:35:49 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//int	g_signal;
 volatile sig_atomic_t	g_signal;
 
 void	restore_prompt(int signum)
@@ -62,31 +61,6 @@ void	run_signals(int sig, t_shell *shell)
 		signal(SIGQUIT, back_slash);
 	}
 }
-//*********************************************** */
-// void	init_signal(void)
-// {
-// 	signal(SIGINT, sig_handling);
-// 	signal(SIGQUIT, sig_handling);
-// }
-
-// void	sig_handling(int signum)
-// {
-// 	if (g_signal == 0 && signum == SIGINT)
-// 	{
-// 		write(STDOUT_FILENO, "\n", 1);
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 	}
-// 	else if (g_signal == -1)
-// 	{
-// 		if (signum == SIGINT)
-// 			write(STDOUT_FILENO, "\n", 1);
-// 		else if (signum == SIGQUIT)
-// 			write(STDERR_FILENO, "QUIT\n", 6);
-// 		g_signal = signum;
-// 	}
-// }
 
 void	set_exit_status(t_shell *shell, int signum)
 {
