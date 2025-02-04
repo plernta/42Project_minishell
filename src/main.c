@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 08:37:12 by plesukja          #+#    #+#             */
-/*   Updated: 2025/02/04 14:35:22 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:35:01 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	init_shell(t_shell **shell, char **envp)
 	*shell = ft_calloc(1, sizeof(t_shell));
 	if (!(*shell))
 		exit(EXIT_FAILURE);
+	(*shell)->current_cmd = NULL;///////
 	(*shell)->env_arr = get_env_arr(envp);
 	create_env_linked_list(&(*shell)->env, envp);
 	(*shell)->has_pipe = 0;
@@ -79,6 +80,43 @@ static void	init_shell(t_shell **shell, char **envp)
 	(*shell)->default_stdout = STDOUT_FILENO;
 	(*shell)->in_fd = STDIN_FILENO;
 	(*shell)->out_fd = STDOUT_FILENO;
+}
+
+//original
+// int	main(int ac, char **av, char **envp)
+// {
+// 	t_shell	*shell;
+// 	char	*input;
+
+// 	(void)ac;
+// 	(void)av;
+// 	shell = NULL;
+// 	input = NULL;
+// 	init_shell(&shell, envp);
+// 	run_signals(1, shell);
+// 	while (get_input(&input, shell) != -1)
+// 	{
+// 		process_input(shell, input);
+// 		restore_fd(shell);
+// 		set_exit_status(shell, g_signal);
+// 		free_tree(shell->current_cmd);
+// 		shell->current_cmd = NULL;
+// 		g_signal = 0;
+// 	}
+// 	if (input)
+// 		free(input);
+// 	clean_and_exit(shell);
+// 	return (0);
+// }
+
+static char	*null_input_check(char *input)
+{
+	if (input[0] == '\0')
+	{
+		free(input);
+		input = NULL;
+	}
+	return (input);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -94,6 +132,8 @@ int	main(int ac, char **av, char **envp)
 	run_signals(1, shell);
 	while (get_input(&input, shell) != -1)
 	{
+		if (null_input_check(input) == NULL)
+			continue ;
 		process_input(shell, input);
 		restore_fd(shell);
 		set_exit_status(shell, g_signal);
@@ -106,3 +146,36 @@ int	main(int ac, char **av, char **envp)
 	clean_and_exit(shell);
 	return (0);
 }
+
+//edited
+// int	main(int ac, char **av, char **envp)
+// {
+// 	t_shell	*shell;
+// 	char	*input;
+
+// 	(void)ac;
+// 	(void)av;
+// 	shell = NULL;
+// 	input = NULL;
+// 	init_shell(&shell, envp);
+// 	run_signals(1, shell);
+// 	while (get_input(&input, shell) != -1)
+// 	{
+// 		if (input[0] == '\0')
+// 		{
+// 			free(input);
+// 			input = NULL;
+// 			continue ;
+// 		}
+// 		process_input(shell, input);
+// 		restore_fd(shell);
+// 		set_exit_status(shell, g_signal);
+// 		free_tree(shell->current_cmd);
+// 		shell->current_cmd = NULL;
+// 		g_signal = 0;
+// 	}
+// 	if (input)
+// 		free(input);
+// 	clean_and_exit(shell);
+// 	return (0);
+// }
