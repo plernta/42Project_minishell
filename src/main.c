@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 08:37:12 by plesukja          #+#    #+#             */
-/*   Updated: 2025/02/04 15:35:01 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:51:03 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	init_shell(t_shell **shell, char **envp)
 	*shell = ft_calloc(1, sizeof(t_shell));
 	if (!(*shell))
 		exit(EXIT_FAILURE);
-	(*shell)->current_cmd = NULL;///////
+	(*shell)->current_cmd = NULL;
 	(*shell)->env_arr = get_env_arr(envp);
 	create_env_linked_list(&(*shell)->env, envp);
 	(*shell)->has_pipe = 0;
