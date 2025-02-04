@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 23:37:54 by plesukja          #+#    #+#             */
-/*   Updated: 2025/01/24 22:50:42 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:00:33 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ static t_token	*create_cmd_token(void)
 		return (NULL);
 	ft_memset(cmd, 0, sizeof(*cmd));
 	cmd->type = COMMAND;
+	//*** */
+	// cmd->av = malloc(sizeof(char *) * MAXARGS);
+	// cmd->end_av = malloc(sizeof(char *) * MAXARGS);
+	// if (!cmd->av || !cmd->end_av)
+	// {
+	// 	free(cmd);
+	// 	return (NULL);
+	// }
+	//** */
 	return ((t_token *)cmd);
 }
 
@@ -68,6 +77,32 @@ char *end)
 	return (token);
 }
 
+// t_token	*parse_pipe(char **ptr, char *end)
+// {
+// 	t_token	*left;
+// 	t_token	*right;
+
+// 	left = parse_token(ptr, NULL, end);
+// 	if (!left)
+// 		return (NULL);
+// 	if (find_next_token(ptr, end, "|"))
+// 	{
+// 		if (left->type == COMMAND && !((t_cmd *)left)->av[0])
+// 			return (parser_error("syntax error near unexpected token '|'\n", \
+// 				left));
+// 		go_get_token_sign(ptr, end, 0, 0);
+// 		right = parse_pipe(ptr, end);
+// 		if (!right || (right && right->type == COMMAND && !((t_cmd *)right)->av[0]))//change order
+// 		{
+// 			free_tree(right);
+// 			return (parser_error("syntax error near unexpected token '|'\n", \
+// 				left));
+// 		}
+// 		left = create_pipe_token(left, right);
+// 	}
+// 	return (left);
+// }
+
 t_token	*parse_pipe(char **ptr, char *end)
 {
 	t_token	*left;
@@ -83,11 +118,14 @@ t_token	*parse_pipe(char **ptr, char *end)
 				left));
 		go_get_token_sign(ptr, end, 0, 0);
 		right = parse_pipe(ptr, end);
-		if ((right->type == COMMAND && !((t_cmd *)right)->av[0]) || !right)
+		if (!right || (right && right->type == COMMAND && \
+			!((t_cmd *)right)->av[0]))
 		{
 			free_tree(right);
-			return (parser_error("syntax error near unexpected token '|'\n", \
-				right));
+			if (right)
+				return (parser_error("syntax error near unexpected token \
+					'|'\n", left));
+			return (NULL);
 		}
 		left = create_pipe_token(left, right);
 	}
